@@ -1,2 +1,3 @@
 # 47.6-seconds
-Masz rok na zdobycie poparcia 5% i wejście do sejmu
+
+Konsolowa kopia gry 60 seconds
