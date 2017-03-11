@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <time.h>
+#include <string>
 #include "stdafx.h"
 #include "Header.h"
 using namespace std;
@@ -208,11 +209,13 @@ void Game::Start()
 		{
 			cout << endl << "W schronie nie ma apteczki, ale przynajmniej jest spray na owady...";
 		}
-	Sleep(10000);
 
-}
-void Game::PrzypiszWartosci()
-{
+		Postac TedP(Ted, "Ted");;
+		Postac DoloresP(Dolores, "Dolores");
+		Postac TimmyP(Timmy, "Timmy");
+		Postac MaryJaneP(MaryJane, "Mary Jane");
+	Sleep(10000);
+	Gra(TedP, DoloresP, TimmyP, MaryJaneP);
 
 }
 void Game::Options()
@@ -220,6 +223,10 @@ void Game::Options()
 	system("cls");
 	cout << " Na ten moment nie ma :P" << endl;
 	Sleep(1200);
+} 
+void Game::PrzypiszWartosci()
+{
+
 }
 void Game::CoZdobyles()
 {
@@ -483,15 +490,136 @@ void Game::CoZdobyles()
 		}
 	}
 	Ted = true;
+	dzien = 1;
 }
+void Game::Gra(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane)
+{ 
+	while (true)
+	{
+		system("cls");
+		cout << "Dzien " << dzien << endl << endl;
+		StanRodziny(Ted, Dolores, Timmy, MaryJane);
+		OpisDnia(Ted, Dolores, Timmy, MaryJane);
+		dzien++;
+		Sleep(2000);
+	}
+}
+void Game::StanRodziny(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane)
+{
+	if (Ted.zyje == true)
+	{
+		cout << "Ted:      " << Ted.GlodOpis << " " << Ted.WodaOpis;
+		if (Ted.chory == true)
+		{
+			cout << " chory ";
+		}
+		if (Ted.ranny == true)
+		{
+			cout << " ranny ";
+		}
+		if (Ted.szalony == true)
+		{
+			cout << " szalony ";
+		}
+		if (Ted.zmeczony == true)
+		{
+			cout << " zmeczony ";
+		}
+	}
+	else
+	{
+		cout << "Ted nie zyje";
+	}
+	cout << endl;
+	if (Dolores.zyje == true)
+	{
+		cout << "Dolores:  " << Dolores.GlodOpis << " " << Dolores.WodaOpis;
+		if (Dolores.chory == true)
+		{
+			cout << " chory ";
+		}
+		if (Dolores.ranny == true)
+		{
+			cout << " ranny ";
+		}
+		if (Dolores.szalony == true)
+		{
+			cout << " szalony ";
+		}
+		if (Dolores.zmeczony == true)
+		{
+			cout << " zmeczony ";
+		}
+	}
+	else
+	{
+		cout << "Dolores nie zyje";
+	}
+	cout << endl;
+	if (Timmy.zyje == true)
+	{
+		cout << "Timmy:    " << Timmy.GlodOpis << " " << Timmy.WodaOpis;
+		if (Timmy.chory == true)
+		{
+			cout << " chory ";
+		}
+		if (Timmy.ranny == true)
+		{
+			cout << " ranny ";
+		}
+		if (Timmy.szalony == true)
+		{
+			cout << " szalony ";
+		}
+		if (Timmy.zmeczony == true)
+		{
+			cout << " zmeczony ";
+		}
+	}
+	else
+	{
+		cout << "Timmy nie zyje";
+	}
+	cout << endl;
+	if (MaryJane.zyje == true)
+	{
+		cout << "MaryJane: " << MaryJane.GlodOpis << " " << MaryJane.WodaOpis;
+		if (MaryJane.chory == true)
+		{
+			cout << " chory ";
+		}
+		if (MaryJane.ranny == true)
+		{
+			cout << " ranny ";
+		}
+		if (MaryJane.szalony == true)
+		{
+			cout << " szalony ";
+		}
+		if (MaryJane.zmeczony == true)
+		{
+			cout << " zmeczony ";
+		}
+	}
+	else
+	{
+		cout << "MaryJane nie zyje";
+	}
+	cout << endl;
+}
+void Game::OpisDnia(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane)
+{
+	
+}
+
 int wybor()
 {
 	int choice;
-	while (!(cin >> choice)) //dopóki strumieñ jest w stanie b³êdu -> dopóki podawane s¹ b³êdne dane
+	while (!(cin >> choice)) //dopÃ³ki strumieÅ„ jest w stanie bÅ‚Ä™du -> dopÃ³ki podawane sÄ… bÅ‚Ä™dne dane
 	{
-		cout << "blad" << endl << endl;//ew komunikat b³êdu
-		cin.clear(); //kasowanie flagi b³êdu strumienia
-		cin.sync(); //kasowanie zbêdnych znaków z bufora
+		cout << "blad" << endl << endl;//ew komunikat bÅ‚Ä™du
+		cin.clear(); //kasowanie flagi bÅ‚Ä™du strumienia
+		cin.sync(); //kasowanie zbÄ™dnych znakÃ³w z bufora
 		cin.ignore();
 	}
 	return choice;
