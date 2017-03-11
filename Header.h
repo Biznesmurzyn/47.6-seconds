@@ -1,17 +1,66 @@
 #include <iostream>
 #include <windows.h>
 #include <time.h>
+#include <string>
 using namespace std;
 //Klasy i metody
+class Postac
+{
+public:
+	string imie;
+	bool zyje;
+	float glod;
+	float woda;
+	float zmeczenie;
+	float stanumyslu;
+	string GlodOpis;
+	string WodaOpis;
+	bool chory, ranny, szalony, zmeczony;
+	Postac(bool przezyl, string nazwa)
+	{
+		if (przezyl)
+		{
+			imie = nazwa;
+			zyje = true;
+			glod = 8;
+			woda = 8;
+			zmeczenie = 100;
+			stanumyslu = 100;
+			GlodOpis = "Pelny/a";
+			WodaOpis = "Napojony/a";
+			chory = false;
+			ranny = false;
+			szalony = false;
+			zmeczony = false;
+		}
+		else
+		{
+			imie = nazwa;
+			zyje = false;
+			glod = 8;
+			woda = 8;
+			zmeczenie = 100;
+			stanumyslu = 100;
+			GlodOpis = "Pelny/a";
+			WodaOpis = "Napojony/a";
+			chory = false;
+			ranny = false;
+			szalony = false;
+			zmeczony = false;
+		}
+	}
+};
 class Game
 {
 public:
+	//Ogolne
+	int dzien;
 	//wybory gracza
 	int choice1,choice2,choice3;
 	//prowiant
 	float jedzenie, woda;
 	//postacie
-	bool Ted, Timmy, MaryJane, Dolores;
+	bool Ted, Dolores, MaryJane, Timmy;
 	//rozrywka
 	bool karty, warcaby;
 	//przetrwanie
@@ -21,14 +70,16 @@ public:
 	//obrona
 	bool karabin, siekiera, klodka;
 	
-	//poza gr¹
+	//poza grÄ…
 	void Menu();
 	void Start();
 	void Options();
 	void PrzypiszWartosci();
-	//w grze
 	void CoZdobyles();
+	//w grze
+	void Gra(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane);
+	void StanRodziny(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane);
+	void OpisDnia(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane);
 };
-
 //Funkcje
 int wybor();
