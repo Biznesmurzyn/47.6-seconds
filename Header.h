@@ -9,8 +9,9 @@ class Postac
 public:
 	string imie;
 	bool zyje;
-	float glod;
-	float woda;
+	bool wyprawa;
+	int glod;
+	int woda;
 	float zmeczenie;
 	float stanumyslu;
 	string GlodOpis;
@@ -22,6 +23,7 @@ public:
 		{
 			imie = nazwa;
 			zyje = true;
+			wyprawa = false;
 			glod = 8;
 			woda = 8;
 			zmeczenie = 100;
@@ -37,6 +39,7 @@ public:
 		{
 			imie = nazwa;
 			zyje = false;
+			wyprawa = false;
 			glod = 8;
 			woda = 8;
 			zmeczenie = 100;
@@ -55,6 +58,7 @@ class Game
 public:
 	//Ogolne
 	int dzien;
+	bool TedJ, TedW, TimmyJ, TimmyW, DoloresJ, DoloresW, MaryJaneJ, MaryJaneW;
 	//wybory gracza
 	int choice1,choice2,choice3;
 	//prowiant
@@ -70,16 +74,19 @@ public:
 	//obrona
 	bool karabin, siekiera, klodka;
 	
-	//poza grÄ…
+	//poza gr¹
 	void Menu();
 	void Start();
 	void Options();
 	void PrzypiszWartosci();
 	void CoZdobyles();
 	//w grze
-	void Gra(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane);
-	void StanRodziny(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane);
-	void OpisDnia(Postac Ted, Postac Dolores, Postac Timmy, Postac MaryJane);
+	void Gra(Postac &Ted, Postac& Dolores, Postac &Timmy, Postac &);
+	void StanRodziny(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
+	void OpisDnia(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
+	void Przydziel(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
+	void Aktualizacja(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
+	void Event(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
 };
 //Funkcje
 int wybor();
