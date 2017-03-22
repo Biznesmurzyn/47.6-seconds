@@ -216,6 +216,7 @@ void Game::Start()
 		Postac MaryJaneP(MaryJane, "Mary Jane");
 	Sleep(1000);
 	Gra(TedP, DoloresP, TimmyP, MaryJaneP);
+	koniec = false;
 
 }
 void Game::Options()
@@ -496,18 +497,27 @@ void Game::Gra(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane)
 { 
 	while (true)
 	{
-		system("cls");
-		cout << "Dzien " << dzien << endl << endl;
-		StanRodziny(Ted, Dolores, Timmy, MaryJane);
-		OpisDnia(Ted, Dolores, Timmy, MaryJane);
-		Przydziel(Ted, Dolores, Timmy, MaryJane);
+
+		if (koniec == true)
+		{
+			return;
+		}
+		else
+		{
+			system("cls");
+			cout << "Dzien " << dzien << endl << endl;
+			StanRodziny(Ted, Dolores, Timmy, MaryJane);
+			OpisDnia(Ted, Dolores, Timmy, MaryJane);
+			Przydziel(Ted, Dolores, Timmy, MaryJane);
+		}
 	}
 }
 void Game::StanRodziny(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane)
 {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (Ted.zyje == true)
 	{
-		cout << "Ted:      " << Ted.GlodOpis << " " << Ted.WodaOpis<<"   "<<Ted.glod<<"/"<<Ted.woda;
+		cout << "Ted:      "<< Ted.GlodOpis << " " <<Ted.WodaOpis<<"   "<<Ted.glod<<"/"<<Ted.woda;
 		if (Ted.chory == true)
 		{
 			cout << " chory ";
@@ -527,7 +537,7 @@ void Game::StanRodziny(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &Mary
 	}
 	else
 	{
-		cout << "Ted nie zyje";
+		cout << "Ted       nie zyje";
 	}
 	cout << endl;
 	if (Dolores.zyje == true)
@@ -552,7 +562,7 @@ void Game::StanRodziny(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &Mary
 	}
 	else
 	{
-		cout << "Dolores nie zyje";
+		cout << "Dolores   nie zyje";
 	}
 	cout << endl;
 	if (Timmy.zyje == true)
@@ -577,7 +587,7 @@ void Game::StanRodziny(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &Mary
 	}
 	else
 	{
-		cout << "Timmy nie zyje";
+		cout << "Timmy     nie zyje";
 	}
 	cout << endl;
 	if (MaryJane.zyje == true)
@@ -602,7 +612,7 @@ void Game::StanRodziny(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &Mary
 	}
 	else
 	{
-		cout << "MaryJane nie zyje";
+		cout << "MaryJane  nie zyje";
 	}
 	cout << endl<<endl;
 }
@@ -671,8 +681,9 @@ void Game::Przydziel(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJa
 {
 	cout << "Przydziel zywnosc (1)" << endl;
 	cout << "Uzyj apteczki (2)" << endl;
-	cout << "Wyrusz na wyprawe (3)" << endl;
-	cout << "Nastepny dzien (4)" << endl;
+	cout << "Zapasy (3)" << endl;
+	cout << "Wyrusz na wyprawe (4)" << endl;
+	cout << "Nastepny dzien (5)" << endl;
 	int choice = wybor();
 	switch (choice)
 	{
@@ -698,91 +709,193 @@ void Game::Przydziel(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJa
 		int choice2 = wybor();
 		switch (choice2)
 		{
-		case 1:
-		{
-			if (Ted.zyje == true)
-			{
-				cout << endl << endl << "Jedzenie (1)" << endl << "Woda(2)" << endl << endl;
-				int choice3 = wybor();
-				switch (choice3)
-				{
-				case 1: TedJ = true; break;
-				case 2: TedW = true; break;
-				}
-			}
-			else
-			{
-				cout << "Coo?";
-				break;
-			}
-			break;
-		}
-		case 2:
-		{
-			if (Dolores.zyje == true)
-			{
-				cout << endl << endl << "Jedzenie (1)" << endl << "woda(2)" << endl << endl;
-				int choice3 = wybor();
-				switch (choice3)
-				{
-				case 1: DoloresJ = true;
-				case 2: DoloresW = true;
-				}
-			}
-			else
-			{
-				cout << "Coo?";
-				break;
-			}
-			break;
-		}
-		case 3:
-		{
-			if (Timmy.zyje == true)
-			{
-				cout << endl << endl << "Jedzenie (1)" << endl << "woda(2)" << endl << endl;
-				int choice3 = wybor();
-				switch (choice3)
-				{
-				case 1: TimmyJ = true;
-				case 2: TimmyW = true;
-				}
-			}
-			else
-			{
-				cout << "Coo?";
-				break;
-			}
-			break;
-		}
-		case 4:
-		{
-			if (MaryJane.zyje == true)
-			{
-				cout << endl << endl << "Jedzenie (1)" << endl << "woda(2)" << endl << endl;
-				int choice3 = wybor();
-				switch (choice3)
-				{
-				case 1: MaryJaneJ = true;
-				case 2: MaryJaneW = true;
-				}
-			}
-			else
-			{
-				cout << "Coo?";
-				break;
-			}
-			break;
-		}
+		case 1: Przydzielzywnosc(Ted); break;
+
+		case 2: Przydzielzywnosc(Dolores); break;
+
+		case 3: Przydzielzywnosc(Timmy); break;
+
+		case 4: Przydzielzywnosc(MaryJane); break;
+
 		}
 		break;
 	}
-	case 4:
+	case 2:
+	{
+		system("cls");
+		if (Ted.zyje == true)
+		{
+			cout << "Ted (1)" << endl;
+		}
+		if (Dolores.zyje == true)
+		{
+			cout << "Dolores (2)" << endl;
+		}
+		if (Timmy.zyje == true)
+		{
+			cout << "Timmy (3)" << endl;
+		}
+		if (MaryJane.zyje == true)
+		{
+			cout << "Mary Jane (4)" << endl;
+		}
+		int choice2 = wybor();
+		switch (choice2)
+		{
+		case 1: Przydzielleki(Ted); break;
+
+		case 2: Przydzielleki(Dolores); break;
+
+		case 3: Przydzielleki(Timmy); break;
+
+		case 4: Przydzielleki(MaryJane); break;
+
+		}
+		break;
+	}
+	case 3:
+	{
+		system("cls");
+		cout << "W spichlerzu jest " << woda << " butelek wody oraz " << jedzenie << " puszek zupy" << endl;
+		cout << "Poza tym w schronie znajduje sie: " << endl;
+		if (apteczka == true)
+		{
+			cout << "apteczka" << endl;
+		}
+		if (spray == true)
+		{
+			cout << "spray na owady" << endl;
+		}
+		if (karty == true)
+		{
+			cout << "karty" << endl;
+		}
+		if (warcaby == true)
+		{
+			cout << "warcaby" << endl;
+		}
+		if (radio == true)
+		{
+			cout << "radio" << endl;
+		}
+		if (poradnik == true)
+		{
+			cout << "poradnik malego skauta" << endl;
+		}
+		if (mapa == true)
+		{
+			cout << "mapa" << endl;
+		}
+		if (siekiera == true)
+		{
+			cout << "siekiera" << endl;
+		}
+		if (karabin == true)
+		{
+			cout << "karabin" << endl;
+		}
+		if (klodka == true)
+		{
+			cout << "klodka" << endl;
+		}
+		Sleep(5000);
+		break;
+	}
+	case 4: break;
+	case 5:
 	{
 		Aktualizacja(Ted, Dolores, Timmy, MaryJane);
 		break;
 	}
 	}
+}
+void Game::Przydzielzywnosc(Postac &postac)
+{
+
+	if (postac.zyje == true)
+	{
+		cout << endl << endl << "Jedzenie (1)" << endl << "Woda(2)" << endl << endl;
+		int choice3 = wybor();
+		switch (choice3)
+		{
+		case 1:
+		{
+			if (postac.J == true)
+			{
+				postac.J = false;
+				jedzenie += 0.25;
+			}
+			else if (jedzenie >= 0.25)
+			{
+				postac.J = true;
+				jedzenie -= 0.25;
+			}
+			else
+			{
+				cout << "Nie macie jedzenia ! ha ha";
+				Sleep(1250);
+
+			}
+			break;
+		}
+		case 2:
+		{
+			if (postac.W == true)
+			{
+				postac.W = false;
+				woda += 0.25;
+			}
+			else if (woda >= 0.25)
+			{
+				postac.W = true;
+				woda -= 0.25;
+			}
+			else
+			{
+				cout << "Nie macie wody ! ha ha";
+				Sleep(1250);
+
+			}
+			break;
+		}
+		}
+	}
+	else
+	{
+		cout << "Coo?";
+	}
+}
+void Game::Przydzielleki(Postac &postac)
+{
+		if (postac.zyje == true)
+		{
+			if (postac.A==true)
+			{
+				postac.A = false;
+				apteczka = true;
+			}
+			else if (postac.A == false)
+			{
+				if (apteczka == false)
+				{
+					system("cls");
+					cout << "Nie macie apteczki";
+					Sleep(1000);
+				}
+				else if (apteczka == true)
+				{
+					postac.A = true;
+					apteczka = false;
+					cout << postac.imie << " otrzymal leki";
+				}
+				}
+
+		}
+		else
+		{
+			cout << "Coo?";
+		}
+
 }
 void Game::Aktualizacja(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane)
 {
@@ -791,67 +904,114 @@ void Game::Aktualizacja(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &Mar
 	Dolores.glod -= 1; Dolores.woda -= 2;
 	Timmy.glod -= 1; Timmy.woda -= 2;
 	MaryJane.glod -= 1; MaryJane.woda -= 2;
-	//System jedzenia/picia
+	//System jedzenia/picia/apteczki
 	if (Ted.zyje == true)
 	{
-		if (TedJ == true)
+		if (Ted.J == true)
 		{
 			Ted.glod = Ted.glod + 6;
-			jedzenie -= 0.25;
-			TedJ = false;
+			Ted.J = false;
+			if (Ted.glod > 8)
+			{
+				Ted.glod = 8;
+			}
 		}
-		if (TedW == true)
+		if (Ted.W == true)
 		{
 			Ted.woda = Ted.woda + 8;
-			woda -= 0.25;
-			TedW = false;
+			Ted.W = false;
+			if (Ted.woda > 8)
+			{
+				Ted.woda = 8;
+			}
+		}
+		if (Ted.A == true)
+		{
+			Ted.chory = false;
+			Ted.ranny = false;
 		}
 	}
 	if (Dolores.zyje == true)
 	{
-		if (DoloresJ == true)
+		if (Dolores.J == true)
 		{
 			Dolores.glod = Dolores.glod + 6;
-			jedzenie -= 0.25;
-			DoloresJ = false;
+			Dolores.J = false;
+			if (Dolores.glod > 8)
+			{
+				Dolores.glod = 8;
+			}
 		}
-		if (DoloresW == true)
+		if (Dolores.W == true)
 		{
 			Dolores.woda = Dolores.woda + 8;
-			woda -= 0.25;
-			DoloresW = false;
+			Dolores.W = false;
+			if (Dolores.woda > 8)
+			{
+				Dolores.woda = 8;
+			}
+		}
+		if (Dolores.A == true)
+		{
+			Dolores.chory = false;
+			Dolores.ranny = false;
 		}
 	}
 	if (Timmy.zyje == true)
 	{
-		if (TimmyJ == true)
+		if (Timmy.J == true)
 		{
 			Timmy.glod = Timmy.glod + 6;
-			jedzenie -= 0.25;
-			TimmyJ = false;
+			Timmy.J = false;
+			if (Timmy.glod > 8)
+			{
+				Timmy.glod = 8;
+			}
 		}
-		if (TimmyW == true)
+		if (Timmy.W == true)
 		{
 			Timmy.woda = Timmy.woda + 8;
-			woda -= 0.25;
-			TimmyW = false;
+			Timmy.W = false;
+			if (Timmy.woda > 8)
+			{
+				Timmy.woda = 8;
+			}
 		}
+		if (Timmy.A == true)
+		{
+			Timmy.chory = false;
+			Timmy.ranny = false;
+		}
+
 	}
 	if (MaryJane.zyje == true)
 	{
-		if (MaryJaneJ == true)
+		if (MaryJane.J == true)
 		{
 			MaryJane.glod = MaryJane.glod + 6;
-			jedzenie -= 0.25;
-			MaryJaneJ = false;
+			MaryJane.J = false;
+			if (MaryJane.glod > 8)
+			{
+				MaryJane.glod = 8;
+			}
+
 		}
-		if (MaryJaneW == true)
+		if (MaryJane.W == true)
 		{
 			MaryJane.woda = MaryJane.woda + 8;
-			woda -= 0.25;
-			MaryJaneW = false;
+			MaryJane.W = false;
+			if (MaryJane.woda > 8)
+			{
+				MaryJane.woda = 8;
+			}
+		}
+		if (MaryJane.A == true)
+		{
+			MaryJane.chory = false;
+			MaryJane.ranny = false;
 		}
 	}
+
 	//System œmierci
 	if ((Ted.glod < 1) || (Ted.woda < 1))
 	{
@@ -869,9 +1029,62 @@ void Game::Aktualizacja(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &Mar
 	{
 		MaryJane.zyje = false;
 	}
-	dzien++;
-
+	Stan(Ted);
+	Stan(Dolores);
+	Stan(Timmy);
+	Stan(MaryJane);
+	if ((Ted.zyje == false) && (Dolores.zyje == false) && (Timmy.zyje == false) && (MaryJane.zyje == false))
+	{
+		Koniec(Ted, Dolores, Timmy, MaryJane);
+	}
+	else
+	{
+		dzien++;
+	}
 	
+}
+void Game::Koniec(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane)
+{
+	system("cls");
+	cout << "Nie przetrwaliscie" << endl;
+	cout << "Wytrzymaliscie " << dzien << " dni";
+	Sleep(3000);
+	koniec = true;
+}
+void Game::Stan(Postac &postac)
+{
+	if (postac.glod == 8)
+	{
+		postac.GlodOpis = "Najedzony/a";
+	}
+	else if (postac.glod >= 6)
+	{
+		postac.GlodOpis = "Glodny/a";
+	}
+	else if (postac.glod >= 3)
+	{
+		postac.GlodOpis = "Bardzo glodny/a";
+	}
+	else if (postac.glod >= 1)
+	{
+		postac.GlodOpis = "Umierajacy/a z braku jedzenia";
+	}
+	if (postac.woda == 8)
+	{
+		postac.WodaOpis = "Nawodniony/a";
+	}
+	else if (postac.woda >= 6)
+	{
+		postac.WodaOpis = "Napilby/Napilaby sie";
+	}
+	else if (postac.woda >= 3)
+	{
+		postac.WodaOpis = "Odwodniony/a";
+	}
+	else if (postac.woda >= 1)
+	{
+		postac.WodaOpis = "Umierajacy/a z braku wody";
+	}
 }
 void Game::Event(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane)
 {

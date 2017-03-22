@@ -8,7 +8,9 @@ class Postac
 {
 public:
 	string imie;
+	int plec;
 	bool zyje;
+	bool J, W, A;
 	bool wyprawa;
 	int glod;
 	int woda;
@@ -22,14 +24,17 @@ public:
 		if (przezyl)
 		{
 			imie = nazwa;
+			J = false;
+			W = false;
+			A = false;
 			zyje = true;
 			wyprawa = false;
 			glod = 8;
 			woda = 8;
 			zmeczenie = 100;
 			stanumyslu = 100;
-			GlodOpis = "Pelny/a";
-			WodaOpis = "Napojony/a";
+			GlodOpis = "Swiezo po wybuchu";
+			WodaOpis = "  ";
 			chory = false;
 			ranny = false;
 			szalony = false;
@@ -38,14 +43,17 @@ public:
 		else
 		{
 			imie = nazwa;
+			J = false;
+			W = false;
+			A = false;
 			zyje = false;
 			wyprawa = false;
 			glod = 8;
 			woda = 8;
 			zmeczenie = 100;
 			stanumyslu = 100;
-			GlodOpis = "Pelny/a";
-			WodaOpis = "Napojony/a";
+			GlodOpis = "Swiezo po wybuchu";
+			WodaOpis = "  ";
 			chory = false;
 			ranny = false;
 			szalony = false;
@@ -58,7 +66,6 @@ class Game
 public:
 	//Ogolne
 	int dzien;
-	bool TedJ, TedW, TimmyJ, TimmyW, DoloresJ, DoloresW, MaryJaneJ, MaryJaneW;
 	//wybory gracza
 	int choice1,choice2,choice3;
 	//prowiant
@@ -73,6 +80,8 @@ public:
 	bool apteczka, spray;
 	//obrona
 	bool karabin, siekiera, klodka;
+	//opcje
+	bool koniec;
 	
 	//poza gr¹
 	void Menu();
@@ -85,7 +94,11 @@ public:
 	void StanRodziny(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
 	void OpisDnia(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
 	void Przydziel(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
+	void Przydzielzywnosc(Postac &postac);
+	void Przydzielleki(Postac &postac);
 	void Aktualizacja(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
+	void Stan(Postac &postac);
+	void Koniec(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
 	void Event(Postac &Ted, Postac &Dolores, Postac &Timmy, Postac &MaryJane);
 };
 //Funkcje
